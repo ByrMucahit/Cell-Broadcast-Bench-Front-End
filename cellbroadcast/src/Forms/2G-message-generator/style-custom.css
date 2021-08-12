@@ -1,0 +1,33 @@
+input[type="email"],
+input[type="text"],
+input[type="number"],
+select {
+  width: 400px;
+}
+
+label {
+  margin-top: 1rem;
+}
+
+label.checkbox {
+  font-weight: normal;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
+
+
+@media only  screen and (min-width: 460px) {
+  .genContainer{
+    width: 20px;
+  }
+  
+}
+
+@media only  screen and (min-width: 300px) {
+  textarea{
+    width: 400px;
+  }
+  
+}
