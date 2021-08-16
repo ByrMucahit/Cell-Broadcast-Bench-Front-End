@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import styled from "@emotion/styled";
 import "./style.css";
 import "./style-custom.css";
-import { Segment, Grid, TextArea,  Button, GridColumn, Icon } from 'semantic-ui-react'
+import { Segment, Grid, Button, GridColumn, Icon } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
 
 const MyTextInput = ({ label, ...props }) => {
@@ -14,7 +14,7 @@ const MyTextInput = ({ label, ...props }) => {
     return (
         <>
             <label htmlFor={props.id || props.name}>{label}</label>
-            <input className="text-input" {...field} {...props} />
+            <input id={props.id} className="text-input" {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>
             ) : null}
@@ -22,6 +22,21 @@ const MyTextInput = ({ label, ...props }) => {
     );
 };
 
+
+const MyTextArea = ({ label, ...props }) => {
+    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+    // which we can spread on <input> and alse replace ErrorMessage entirely.
+    const [field, meta] = useField(props);
+    return (
+        <>
+            <label htmlFor={props.id || props.name}>{label}</label>
+            <textarea id={props.id} className="text-input" {...field} {...props} />
+            {meta.touched && meta.error ? (
+                <div className="error">{meta.error}</div>
+            ) : null}
+        </>
+    );
+};
 
 
 // Styled components ....
@@ -64,46 +79,43 @@ const MySelect = ({ label, ...props }) => {
 
 // And now we can use these
 const SignupForm = () => {
+    const initialValues = { cellId: "", 
+    repitationPeriod:"", 
+    lac:"",
+    NumberOfBroadcastRequest:"",
+    message_status: "", 
+    message_generation: "", 
+    messageIdentifier: "",
+    language: "",
+    messageContent: "",
+    BSCIpAddress: ""
+    }
+
+    const schema = Yup.object({
+        cellId: Yup.string().required("Cell Id's required"),
+        repitationPeriod: Yup.string().required("Repitation Period's required"),
+        lac: Yup.string().required("Lac's required"),
+        NumberOfBroadcastRequest:  Yup.string().required("Number Of Broadcast Request's required"),
+        messageIdentifier: Yup.string().required("Message identifier's required"),
+        language: Yup.string().required("Language's required"),
+        messageContent: Yup.string().required("Text Area's required"),
+        BSCIpAddress: Yup.string().required("BSC Ip Address's required")
+    });
+   
     return (
+
         <>
 
+           
             <Formik
-                initialValues={{
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    acceptedTerms: false, // added for our checkbox
-                    jobType: "" // added for our select
-                }}
-                validationSchema={Yup.object({
-                    firstName: Yup.string()
-                        .max(15, "Must be 15 characters or less")
-                        .required("Required"),
-                    lastName: Yup.string()
-                        .max(20, "Must be 20 characters or less")
-                        .required("Required"),
-                    email: Yup.string()
-                        .email("Invalid email addresss`")
-                        .required("Required"),
-                    acceptedTerms: Yup.boolean()
-                        .required("Required")
-                        .oneOf([true], "You must accept the terms and conditions."),
-                    jobType: Yup.string()
-                        // specify the set of valid values for job type
-                        // @see http://bit.ly/yup-mixed-oneOf
-                        .oneOf(
-                            ["designer", "development", "product", "other"],
-                            "Invalid Job Type"
-                        )
-                        .required("Required")
-                })}
-                onSubmit={async (values, { setSubmitting }) => {
-                    await new Promise(r => setTimeout(r, 500));
-                    setSubmitting(false);
+                initialValues={initialValues}
+                validationSchema={schema}
+                onSubmit={(values) => {
+                    console.log(values);
                 }}
             >
 
-                <Form className="genContainer" style={{ position: 'absolute', left: '20%', top: '10%', border: '2px solid AntiqueWhite', borderWidth: 4, borderRadius: 5, width: 900, height: 800, background: '#BC4639' }}>
+                <Form className="genContainer" style={{ position: 'absolute', left: '20%', top: '10%', border: '2px solid AntiqueWhite', borderWidth: 4, borderRadius: 5, width: 900, height: 800, background: '#BC4639' }} >
                     <Segment compact style={{ background: "#4267B2", left: '5%', top: '3%' }}>
                         <Button style={{ background: "#4267B2", color: "#FFFFFF" }}>
                             <Icon /> 2G Message Generator
@@ -113,18 +125,15 @@ const SignupForm = () => {
                     <Grid columns={4} stackable>
                         <Grid.Row>
                             <Grid.Column style={{ left: '5%' }}>
-
                                 <MyTextInput
-                                    label="Cell Id"
+                                    label="cellId"
                                     name="cellId"
                                     type="text"
                                     placeholder="Cell Id"
-
                                 />
 
                             </Grid.Column>
                             <Grid.Column style={{ left: '25%' }}>
-
                                 <MyTextInput
                                     label="Repitation Period"
                                     name="repitationPeriod"
@@ -183,40 +192,33 @@ const SignupForm = () => {
                                 </MySelect>
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row style={{ left: '1%' }}>
-                            <Grid.Column>
-                                <p>Message Content</p>
-                            </Grid.Column>
-
-
-                            <Grid.Column style={{ left: '-7%' }}>
-                                <TextArea
-                                    className="textArea"
+                        <Grid.Row >
+                            <Grid.Column style={{ left: '5%', top: '-8%' }}>
+                                <MyTextArea
+                                    name="messageContent"
                                     label="Message Content"
                                     placeholder='Message Content'
-                                    style={{ minHeight: 150 }}
-                                    rows={2}
+                                    style={{ minHeight: 150 }}      
                                 />
                             </Grid.Column>
-
                         </Grid.Row>
-                        <Grid.Row style={{ left: '5%' }}>
-                            <Grid.Column>
+                        <Grid.Row >
+                            <Grid.Column style={{ left: '5%', top: '-50%' }}>
                                 <MyTextInput
-                                    label="BSCIPAddress"
-                                    name="BscIpAddress"
+                                    label="BSC IP Address"
+                                    name="BSCIpAddress"
                                     type="text"
                                     placeholder="BSC IP Address"
                                 >
                                 </MyTextInput>
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column>
+                        <Grid.Row >
+                            <Grid.Column style={{ top: '-70%' }}>
                                 <NavLink to='/'><Button content='Back' icon='chevron left' labelPosition='left' /></NavLink>
                             </Grid.Column>
-                            <GridColumn style={{ left: '46%' }}>
-                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" />
+                            <GridColumn style={{ left: '46%', top: '-70%'}}>
+                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" type="submit" />
                             </GridColumn>
                         </Grid.Row>
                     </Grid>

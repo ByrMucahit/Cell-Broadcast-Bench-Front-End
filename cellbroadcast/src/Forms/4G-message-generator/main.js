@@ -4,9 +4,9 @@ import * as Yup from "yup";
 import styled from "@emotion/styled";
 import "./style.css";
 import "./style-custom.css";
-import { Segment, Grid, TextArea, Button, GridColumn, Icon} from 'semantic-ui-react'
+import { Segment, Grid, Button, GridColumn, Icon} from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
-
+import GeneratorService from "../../services/GeneratorService";
 
 const MyTextInput = ({ label, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -22,6 +22,22 @@ const MyTextInput = ({ label, ...props }) => {
         </>
     );
 };
+
+const MyTextArea = ({ label, ...props }) => {
+    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+    // which we can spread on <input> and alse replace ErrorMessage entirely.
+    const [field, meta] = useField(props);
+    return (
+        <>
+            <label htmlFor={props.id || props.name}>{label}</label>
+            <textarea id={props.id} className="text-input" {...field} {...props} />
+            {meta.touched && meta.error ? (
+                <div className="error">{meta.error}</div>
+            ) : null}
+        </>
+    );
+};
+
 
 
 
@@ -63,45 +79,43 @@ const MySelect = ({ label, ...props }) => {
     );
 };
 
+
+
 // And now we can use these
 const SignupForm = () => {
+    const initialValues = { 
+    cellId: "", 
+    repitationPeriod:"", 
+    enodebId:"",
+    numberOfBroadcastRequest:"",
+    message_identifier: "",
+    language: "",
+    messageContent: "",
+    mmeIpAddress: ""
+    }
+
+    const schema = Yup.object({
+        cellId: Yup.string().required("Cell Id's required"),
+        repitationPeriod: Yup.string().required("Repitation Period's required"),
+        enodebId: Yup.string().required("EnodebId's required"),
+        numberOfBroadcastRequest:  Yup.string().required("Number Of Broadcast Request's required"),
+        message_identifier: Yup.string().required("Message identifier's required"),
+        language: Yup.string().required("Language's required"),
+        messageContent: Yup.string().required("Text Area's required"),
+        mmeIpAddress: Yup.string().required("MME Ip Address 's required")
+    });
     return (
         <>
         
 
             <Formik
-                initialValues={{
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    acceptedTerms: false, // added for our checkbox
-                    jobType: "" // added for our select
-                }}
-                validationSchema={Yup.object({
-                    firstName: Yup.string()
-                        .max(15, "Must be 15 characters or less")
-                        .required("Required"),
-                    lastName: Yup.string()
-                        .max(20, "Must be 20 characters or less")
-                        .required("Required"),
-                    email: Yup.string()
-                        .email("Invalid email addresss`")
-                        .required("Required"),
-                    acceptedTerms: Yup.boolean()
-                        .required("Required")
-                        .oneOf([true], "You must accept the terms and conditions."),
-                    jobType: Yup.string()
-                        // specify the set of valid values for job type
-                        // @see http://bit.ly/yup-mixed-oneOf
-                        .oneOf(
-                            ["designer", "development", "product", "other"],
-                            "Invalid Job Type"
-                        )
-                        .required("Required")
-                })}
-                onSubmit={async (values, { setSubmitting }) => {
-                    await new Promise(r => setTimeout(r, 500));
-                    setSubmitting(false);
+                initialValues={initialValues}
+                validationSchema={schema}
+                onSubmit={(values) => {
+                    let generatorService = new GeneratorService();
+                    console.log(values);
+
+                    generatorService.add(values);
                 }}
             >
 
@@ -118,7 +132,7 @@ const SignupForm = () => {
 
                                 <MyTextInput
                                     label="Cell ID"
-                                    name="sac"
+                                    name="cellId"
                                     type="text"
                                     placeholder="SAC"
 
@@ -140,7 +154,7 @@ const SignupForm = () => {
                             <Grid.Column style={{ left: '5%' }}>
                                 <MyTextInput
                                     label="Enodeb ID"
-                                    name="EnodebId"
+                                    name="enodebId"
                                     type="text"
                                     placeholder="Enodeb ID"
                                 />
@@ -148,7 +162,7 @@ const SignupForm = () => {
                             <Grid.Column style={{ left: '25%' }}>
                                 <MyTextInput
                                     label="Number of broadcast request"
-                                    name="NumberOfBroadcastRequest"
+                                    name="numberOfBroadcastRequest"
                                     type="text"
                                     placeholder="Number of broadcast request"
                                 />
@@ -158,9 +172,9 @@ const SignupForm = () => {
                             <Grid.Column style={{ left: '5%' }}>
                                 <MySelect
                                     label="Message Identifier"
-                                    name="messageIdentifier"
+                                    name="message_identifier"
                                 >
-                                    <option value="">Message Identifier</option>
+                                    <option value="0">Message Identifier</option>
                                     <option value="4370">Presential Level Alerts</option>
                                     <option value="4371">Extreme Alerts with Severity of Extreme, Urgency of Immediate and Certainty of Observed</option>
                                     <option value="4372">Extreme Alerts with Severity of Extreme, Urgency of Immediate and Certainty of Likely</option>
@@ -178,34 +192,30 @@ const SignupForm = () => {
                             <Grid.Column style={{ left: '25%' }}>
                                 <MySelect label="Language" name="language">
                                     <option value="">Select language</option>
-                                    <option value="english">English</option>
-                                    <option value="turkish">Turkish</option>
-                                    <option value="other">Other</option>
+                                    <option value="1">English</option>
+                                    <option value="88">Turkish</option>
+                                    <option value="0">Other</option>
 
                                 </MySelect>
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row style={{ left: '1%' }}>
-                            <Grid.Column>
-                                <p>Message Content</p>
-                            </Grid.Column>
-
-
-                            <Grid.Column style={{ left: '-7%' }}>
-                                <TextArea
+                        <Grid.Row >
+                            <Grid.Column style={{ left: '5%', top: '-8%' }}>
+                                <MyTextArea
                                     label="Message Content"
+                                    name="messageContent"
                                     placeholder='Message Content'
                                     style={{ minHeight: 150 }}
-                                    rows={2}
+                                   
                                 />
                             </Grid.Column>
 
                         </Grid.Row>
-                        <Grid.Row style={{ left: '5%' }}>
-                            <Grid.Column>
+                        <Grid.Row >
+                            <Grid.Column style={{ left: '5%', top: '-50%' }}>
                                 <MyTextInput
                                     label="MME IP Address"
-                                    name="MmmeIpAddress"
+                                    name="mmeIpAddress"
                                     type="text"
                                     placeholder="MME IP Address"
                                 >
@@ -213,11 +223,11 @@ const SignupForm = () => {
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column>
+                            <Grid.Column style={{ top: '-70%' }}>
                                 <NavLink to='/'><Button content='Back' icon='chevron left' labelPosition='left' /></NavLink>
                             </Grid.Column>
-                            <GridColumn style={{ left: '46%' }}>
-                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" />
+                            <GridColumn style={{ left: '46%', top: '-70%'}}>
+                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" type="submit"/>
                             </GridColumn>
                         </Grid.Row>
                     </Grid>
