@@ -6,9 +6,10 @@ export default class generatorService {
     }
 
     add(data){
-        return axios.post("http://localhost:8080/api/generators/add",data).then(
+         axios.post("http://localhost:8080/api/generators/add",data).then(
             function (response) {
                 console.log(response);
+                console.log("data:",data);
             }
         ).catch(function(error){
             console.log(error)

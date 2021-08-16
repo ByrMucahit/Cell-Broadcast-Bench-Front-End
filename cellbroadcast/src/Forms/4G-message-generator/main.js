@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import styled from "@emotion/styled";
 import "./style.css";
 import "./style-custom.css";
-import { Segment, Grid, Button, GridColumn, Icon} from 'semantic-ui-react'
+import { Segment, Grid, Button, GridColumn, Icon } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
 import GeneratorService from "../../services/GeneratorService";
 
@@ -83,22 +83,26 @@ const MySelect = ({ label, ...props }) => {
 
 // And now we can use these
 const SignupForm = () => {
-    const initialValues = { 
-    cellId: "", 
-    repitationPeriod:"", 
-    enodebId:"",
-    numberOfBroadcastRequest:"",
-    message_identifier: "",
-    language: "",
-    messageContent: "",
-    mmeIpAddress: ""
+    const initialValues = {
+        idStamp: "",
+        sender_id:1,
+        department_id:2, 
+        language: "",
+        cellId: "",
+        repitationPeriod: "",
+        enodebId: "",
+        numberOfBroadcastRequest: "",
+        message_identifier: "",
+        messageContent: "",
+        mmeIpAddress: "",
+        selected_cells: ""
     }
 
     const schema = Yup.object({
         cellId: Yup.string().required("Cell Id's required"),
         repitationPeriod: Yup.string().required("Repitation Period's required"),
         enodebId: Yup.string().required("EnodebId's required"),
-        numberOfBroadcastRequest:  Yup.string().required("Number Of Broadcast Request's required"),
+        numberOfBroadcastRequest: Yup.string().required("Number Of Broadcast Request's required"),
         message_identifier: Yup.string().required("Message identifier's required"),
         language: Yup.string().required("Language's required"),
         messageContent: Yup.string().required("Text Area's required"),
@@ -106,7 +110,7 @@ const SignupForm = () => {
     });
     return (
         <>
-        
+
 
             <Formik
                 initialValues={initialValues}
@@ -114,7 +118,6 @@ const SignupForm = () => {
                 onSubmit={(values) => {
                     let generatorService = new GeneratorService();
                     console.log(values);
-
                     generatorService.add(values);
                 }}
             >
@@ -191,10 +194,10 @@ const SignupForm = () => {
                             </Grid.Column>
                             <Grid.Column style={{ left: '25%' }}>
                                 <MySelect label="Language" name="language">
-                                    <option value="">Select language</option>
+                                    <option value="0">Select language</option>
                                     <option value="1">English</option>
                                     <option value="88">Turkish</option>
-                                    <option value="0">Other</option>
+                                    <option value="2">Other</option>
 
                                 </MySelect>
                             </Grid.Column>
@@ -206,7 +209,7 @@ const SignupForm = () => {
                                     name="messageContent"
                                     placeholder='Message Content'
                                     style={{ minHeight: 150 }}
-                                   
+
                                 />
                             </Grid.Column>
 
@@ -226,8 +229,8 @@ const SignupForm = () => {
                             <Grid.Column style={{ top: '-70%' }}>
                                 <NavLink to='/'><Button content='Back' icon='chevron left' labelPosition='left' /></NavLink>
                             </Grid.Column>
-                            <GridColumn style={{ left: '46%', top: '-70%'}}>
-                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" type="submit"/>
+                            <GridColumn style={{ left: '46%', top: '-70%' }}>
+                                <Button content="Next" icon='chevron right' labelPosition='right' floated="right" type="submit" />
                             </GridColumn>
                         </Grid.Row>
                     </Grid>
