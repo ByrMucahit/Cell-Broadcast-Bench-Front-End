@@ -84,41 +84,37 @@ const MySelect = ({ label, ...props }) => {
 // And now we can use these
 const SignupForm = () => {
     const initialValues = {
-        idStamp: "",
-        sender_id:1,
         department_id:2, 
-        language: "",
-        cellId: "",
-        repitationPeriod: "",
-        enodebId: "",
-        numberOfBroadcastRequest: "",
-        message_identifier: "",
-        messageContent: "",
-        mmeIpAddress: "",
-        selected_cells: ""
+        language: 88, 
+        message_identifier: "",        
+        sender_id: 0
     }
 
     const schema = Yup.object({
-        cellId: Yup.string().required("Cell Id's required"),
-        repitationPeriod: Yup.string().required("Repitation Period's required"),
-        enodebId: Yup.string().required("EnodebId's required"),
-        numberOfBroadcastRequest: Yup.string().required("Number Of Broadcast Request's required"),
+        //cellId: Yup.string().required("Cell Id's required"),
+       // repitationPeriod: Yup.string().required("Repitation Period's required"),
+       // enodebId: Yup.string().required("EnodebId's required"),
+        //numberOfBroadcastRequest: Yup.string().required("Number Of Broadcast Request's required"),
         message_identifier: Yup.string().required("Message identifier's required"),
         language: Yup.string().required("Language's required"),
-        messageContent: Yup.string().required("Text Area's required"),
-        mmeIpAddress: Yup.string().required("MME Ip Address 's required")
+        //messageContent: Yup.string().required("Text Area's required"),
+       // mmeIpAddress: Yup.string().required("MME Ip Address 's required")
     });
     return (
         <>
 
-
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={schema}
+                
                 onSubmit={(values) => {
                     let generatorService = new GeneratorService();
-                    console.log(values);
-                    generatorService.add(values);
+                    console.log("values: ",values);
+                    const article = JSON.stringify({title: 'Axios POST request Example'});
+                    const JsonValue = JSON.stringify(values);
+                    console.log("JSON:",JsonValue)
+                    generatorService.add(JsonValue);
                 }}
             >
 
@@ -133,42 +129,20 @@ const SignupForm = () => {
                         <Grid.Row>
                             <Grid.Column style={{ left: '5%' }}>
 
-                                <MyTextInput
-                                    label="Cell ID"
-                                    name="cellId"
-                                    type="text"
-                                    placeholder="SAC"
-
-                                />
+                               
 
                             </Grid.Column>
                             <Grid.Column style={{ left: '25%' }}>
 
-                                <MyTextInput
-                                    label="Repitation Period"
-                                    name="repitationPeriod"
-                                    type="text"
-                                    placeholder="Repitation Period"
-                                />
-
+                               
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column style={{ left: '5%' }}>
-                                <MyTextInput
-                                    label="Enodeb ID"
-                                    name="enodebId"
-                                    type="text"
-                                    placeholder="Enodeb ID"
-                                />
+                               
                             </Grid.Column>
                             <Grid.Column style={{ left: '25%' }}>
-                                <MyTextInput
-                                    label="Number of broadcast request"
-                                    name="numberOfBroadcastRequest"
-                                    type="text"
-                                    placeholder="Number of broadcast request"
-                                />
+                               
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
@@ -204,25 +178,13 @@ const SignupForm = () => {
                         </Grid.Row>
                         <Grid.Row >
                             <Grid.Column style={{ left: '5%', top: '-8%' }}>
-                                <MyTextArea
-                                    label="Message Content"
-                                    name="messageContent"
-                                    placeholder='Message Content'
-                                    style={{ minHeight: 150 }}
-
-                                />
+                               
                             </Grid.Column>
 
                         </Grid.Row>
                         <Grid.Row >
                             <Grid.Column style={{ left: '5%', top: '-50%' }}>
-                                <MyTextInput
-                                    label="MME IP Address"
-                                    name="mmeIpAddress"
-                                    type="text"
-                                    placeholder="MME IP Address"
-                                >
-                                </MyTextInput>
+                                
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>

@@ -9,12 +9,26 @@ export default class generatorService {
          axios.post("http://localhost:8080/api/generators/add",data).then(
             function (response) {
                 console.log(response);
-                console.log("data:",data);
+                alert(JSON.stringify(response)+"data has been sended");
+            }
+        ).catch(function(error){
+            console.log(error.response.data);
+            console.log(error.message);
+        }).then(function(){
+            // always executed
+        })
+    }
+
+    show(article){
+        
+        axios.post("http://localhost:8080/api/generators/show",article).then(response =>{
+                console.log(response)
+             
             }
         ).catch(function(error){
             console.log(error)
         }).then(function(){
-            // always executed
+
         })
     }
 }

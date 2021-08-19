@@ -26,6 +26,7 @@ const SignupForm = () => {
             <NavLink to="/Generator2G"><Button type="submit" circular color='facebook' >2G</Button></NavLink>
             <NavLink to="/Generator3G"><Button type="submit" circular color='twitter'>3G</Button></NavLink>
             <NavLink to="/Generator4G"><Button type="submit" circular color='linkedin'>4G</Button></NavLink>
+            <NavLink to="/Generator5G"><Button type="submit" circular color='linkedin'>5G</Button></NavLink>
             <NavLink to="/List"><Button type="submit" circular color='blue'>List</Button></NavLink>
 
           </div>
