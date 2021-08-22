@@ -84,6 +84,7 @@ const MySelect = ({ label, ...props }) => {
 // And now we can use these
 const SignupForm = () => {
     const initialValues = {
+        idStamp:0,
         department_id:2, 
         language: 88, 
         message_identifier: "",        
@@ -111,9 +112,10 @@ const SignupForm = () => {
                 onSubmit={(values) => {
                     let generatorService = new GeneratorService();
                     console.log("values: ",values);
-                    const article = JSON.stringify({title: 'Axios POST request Example'});
+
                     const JsonValue = JSON.stringify(values);
                     console.log("JSON:",JsonValue)
+
                     generatorService.add(JsonValue);
                 }}
             >

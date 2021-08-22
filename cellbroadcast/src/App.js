@@ -1,10 +1,10 @@
 import './App.css';
-import Basic from './Forms/Main/MainForm';
-import Bst from './Forms/2G-message-generator/main'
-import Ist from './Forms/3G-message-generator/main'
-import Prd from './Forms/4G-message-generator/main'
+import Home from './Forms/Main/home';
+import Gen2G from './Forms/2G-message-generator/generator2g'
+import Gen3G from './Forms/3G-message-generator/main'
+import Gen4G from './Forms/4G-message-generator/generator4g'
 import Tes from './Forms/5G-Test/main'
-import List from './Forms/Test/main'
+import List from './Forms/Test/list'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -15,11 +15,11 @@ function App() {
       <BrowserRouter >
         <div>
           <Switch>
-            <Route path="/" component={Basic}  exact/>
-            <Route path="/Generator2G" component={Bst}  />
-            <Route path="/Generator3G" component={Ist}  />
-            <Route path="/Generator4G" component={Prd}  />
-            <Route path="/Generator5G" component={Tes}  />
+            <Route path="/" exact={true} component={Home}/>
+            <Route path="/Generator2G"  exact={true} component={Gen2G}  />
+            <Route path="/Generator3G"  exact={true} component={Gen3G}  />
+            <Route path="/Generator4G"  exact={true} component={Gen4G}  />
+            <Route path="/Generator5G"  exact={true} component={Tes}  />
             <Route path="/List" component={List}  />
           </Switch>
         </div>

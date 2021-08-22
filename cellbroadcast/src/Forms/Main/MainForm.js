@@ -4,7 +4,7 @@ import "./style.css";
 import "../Main/style-custom.css";
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Image, Form } from 'semantic-ui-react'
-import src1 from '../logo/logo_b.png'
+import srcImage from '../logo/logo_b.png'
 import { NavLink } from 'react-router-dom'
 
 
@@ -30,7 +30,7 @@ const SignupForm = () => {
             <NavLink to="/List"><Button type="submit" circular color='blue'>List</Button></NavLink>
 
           </div>
-          <Image style={{ marginTop: '5%' }} src={src1} size='tiny' centered />
+          <Image style={{ marginTop: '5%' }} src={srcImage} size='tiny' centered />
 
         </Form>
       </Formik>
