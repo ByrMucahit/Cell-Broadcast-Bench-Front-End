@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './Forms/Main/home';
 import Gen2G from './Forms/2G-message-generator/generator2g'
-import Gen3G from './Forms/3G-message-generator/main'
+import Gen3G from './Forms/3G-message-generator/generator3g'
 import Gen4G from './Forms/4G-message-generator/generator4g'
 import Tes from './Forms/5G-Test/main'
 import List from './Forms/Test/list'

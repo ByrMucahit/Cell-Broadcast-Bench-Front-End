@@ -1,11 +1,8 @@
-import React, { Component, useState } from 'react';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Container, Form, FormGroup, Label } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { Formik, useField } from "formik";
-import { Segment, GridColumn, Icon, Grid } from 'semantic-ui-react'
-import MyTextInput from '../../Utilities/MyTextInput';
-import MySelect from '../../Utilities/MySelect';
-import MyTextArea from '../../Utilities/MyTextArea';
+
+
 
 
 
@@ -14,9 +11,10 @@ class Generator2G extends Component {
 
     emptyItem = {
         department_id:2,
-        language: '',
-        message_identifier: '',
-        sender_id:3
+        language: 0,
+        message_identifier: '3453453345',
+        sender_id:3,
+        msg_status:''
     };
 
     constructor(props) {
@@ -30,8 +28,7 @@ class Generator2G extends Component {
     }
 
     async componentDidMount() {
-        const client = await ( await fetch(`/api/generators/add/${this.props.match.params.id}`)).json;
-        this.setState({item: client})
+      
     }
 
     handleChange(event) {
@@ -48,8 +45,11 @@ class Generator2G extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         const { item } = this.state;
+
+        
         console.log("submit")
-        console.log(item);
+        console.log("item FROM handlesubmit: "+ item);
+        
         await fetch('/api/generators/add', {
             method: 'POST',
             headers: {
@@ -57,25 +57,27 @@ class Generator2G extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item),
-        });
-        this.props.history.push('/Generator4G');
+        }).then(response => response.json()).then(data => console.log("data:"+JSON.stringify(data)));
+        this.props.history.push('/');
     }
 
 
     render() {
-        const { item } = this.state;
 
         return (
             <>
                 <div>
                     <Container>
+                        <Label>4G Message Generator</Label>
                         <Form onSubmit={this.handleSubmit}>
+                            <label>msg status</label>
+                            <input onChange={this.handleChange} value={this.state.value} name="msg_status"></input><br/>
                             <label>sender id</label>
                             <input onChange={this.handleChange} value={this.state.value} name="sender_id"></input><br/>
                             <label>Department id</label>
                             <input onChange={this.handleChange} value={this.state.value} name="department_id"></input>
                             <FormGroup>
-                                <select id="messageIdentifier" name="messageIdentifier" onChange={this.handleChange} value={this.state.value} autoComplete="messageIdentifier">
+                                <select id="messageIdentifier" name="message_identifier" onChange={this.handleChange} value={this.state.value} autoComplete="messageIdentifier">
                                     <option value="">Message Identifier</option>
                                     <option value="4370">Presential Level Alerts</option>
                                     <option value="4371">Extreme Alerts with Severity of Extreme, Urgency of Immediate and Certainty of Observed</option>

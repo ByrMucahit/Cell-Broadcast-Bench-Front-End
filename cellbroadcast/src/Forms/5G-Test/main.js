@@ -1,85 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Formik, Form, useField } from "formik";
-import * as Yup from "yup";
-import styled from "@emotion/styled";
+import { Formik, Form } from "formik";
 import "./style.css";
 import "./style-custom.css";
 import { Segment, Grid, Button, GridColumn, Icon } from 'semantic-ui-react'
 import { NavLink } from "react-router-dom";
-import GeneratorService from "../../services/GeneratorService";
-
-const MyTextInput = ({ label, ...props }) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input> and alse replace ErrorMessage entirely.
-    const [field, meta] = useField(props);
-    return (
-        <>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <input className="text-input" {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </>
-    );
-};
-
-const MyTextArea = ({ label, ...props }) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input> and alse replace ErrorMessage entirely.
-    const [field, meta] = useField(props);
-    return (
-        <>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <textarea id={props.id} className="text-input" {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </>
-    );
-};
-
-
-
-
-// Styled components ....
-const StyledSelect = styled.select`
-  color: var(--blue);
-`;
-
-const StyledErrorMessage = styled.div`
-  font-size: 12px;
-  color: var(--red-600);
-  width: 400px;
-  margin-top: 0.25rem;
-  &:before {
-    content: "❌ ";
-    font-size: 10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: var(--red-300);
-  }
-`;
-
-const StyledLabel = styled.label`
-  margin-top: 1rem;
-`;
-
-const MySelect = ({ label, ...props }) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input> and alse replace ErrorMessage entirely.
-    const [field, meta] = useField(props);
-    return (
-        <>
-            <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
-            <StyledSelect {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-            ) : null}
-        </>
-    );
-};
-
 
 export default class PostRequest extends React.Component {
 
