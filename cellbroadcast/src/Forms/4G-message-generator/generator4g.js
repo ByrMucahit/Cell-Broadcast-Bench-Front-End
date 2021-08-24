@@ -48,7 +48,7 @@ class Generator2G extends Component {
 
         
         console.log("submit")
-        console.log("item FROM handlesubmit: "+ item);
+        console.log(JSON.stringify(item));
         
         await fetch('/api/generators/add', {
             method: 'POST',
