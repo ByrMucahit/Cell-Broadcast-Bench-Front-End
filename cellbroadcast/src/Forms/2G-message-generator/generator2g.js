@@ -39,16 +39,12 @@ class Generator2G extends Component {
         let item = { ...this.state.item };
         item[name] = value;
         this.setState({ item });
-        console.log(item);
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         const { item } = this.state;
         
-        console.log("submit")
-        console.log("item FROM handlesubmit: "+ item);
-
         await fetch('/api/generators/3G/add', {
             method: 'POST',
             headers: {
@@ -56,7 +52,7 @@ class Generator2G extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item),
-        }).then(response => response.json()).then(data => console.log("data:"+JSON.stringify(data)));
+        })
         this.props.history.push('/');
     }
 

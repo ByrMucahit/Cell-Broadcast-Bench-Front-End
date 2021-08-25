@@ -31,7 +31,6 @@ class Generator2G extends Component {
     }
 
     async componentDidMount() {
-      
     }
 
     handleChange(event) {
@@ -41,7 +40,6 @@ class Generator2G extends Component {
         let item = { ...this.state.item };
         item[name] = value;
         this.setState({ item });
-        console.log(item);
     }
 
     async handleSubmit(event) {
@@ -50,8 +48,12 @@ class Generator2G extends Component {
         
         await fetch('api/generators/add', {
             method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(item),
-        }).then(response => response.json()).then(data => console.log("data:"+JSON.stringify(data)));
+        })
         this.props.history.push('/');
     }
 
