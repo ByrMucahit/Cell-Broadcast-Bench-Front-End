@@ -89,8 +89,8 @@ class Generator2G extends Component {
 
                             <label htmlFor='cellId' 
                                     style={{
-                                         background: '#7289da', borderRadius: '4px', textAlign: 'center', 
-                                         width: '130%', fontSize:'12px' 
+                                         background: '#7289da', color:'#FFFFFF', borderRadius: '4px', 
+                                         textAlign: 'center', width: '130%', fontSize:'12px' 
                                          }} >Cell Id :
                                 <input name='cellId' placeholder='Cell Id...' onChange={this.handleChange} value={this.state.value}
                                     style={{
@@ -105,8 +105,8 @@ class Generator2G extends Component {
                         <Grid.Column width={8}>
                             <label htmlFor='repitationPeriod' 
                                 style={{
-                                     background: '#7289da', borderRadius: '4px', marginLeft: '47%', 
-                                     width: '140%', fontSize:'12px' 
+                                     background: '#7289da', color:'#FFFFFF', borderRadius: '4px', 
+                                     marginLeft: '47%', width: '140%', fontSize:'12px' 
                                     }} 
                                 >Repitation Period :
 
@@ -126,8 +126,8 @@ class Generator2G extends Component {
                         <Grid.Column width={8}>
                             <label htmlFor='lac' 
                                    style={{ 
-                                       background: '#7289da', borderRadius: '4px', textAlign: 'center', 
-                                       width: '135%', fontSize:'12px' 
+                                       background: '#7289da', color:'#FFFFFF', borderRadius: '4px', 
+                                       textAlign: 'center', width: '135%', fontSize:'12px' 
                                     }} 
                                    >LAC :
                                 <input name='lac' placeholder='LAC...' onChange={this.handleChange} value={this.state.value}
@@ -142,7 +142,10 @@ class Generator2G extends Component {
 
                         <Grid.Column width={8}>
                             <label htmlFor='numberOfBroadcastRequest' 
-                            style={{ background: '#7289da', borderRadius: '4px', marginLeft: '45%', width: '125%', fontSize:'12px' }} 
+                            style={{ 
+                                background: '#7289da', color:'#FFFFFF',borderRadius: '4px', 
+                                marginLeft: '45%', width: '125%', fontSize:'12px' 
+                                    }} 
                             >Number Of Broadcast Request :
                                 <input name='numberOfBroadcastRequest' placeholder='Number Of Broadcast Request...' onChange={this.handleChange} value={this.state.value}
                                     style={{
@@ -159,8 +162,9 @@ class Generator2G extends Component {
                         <Grid.Column width={8} >
                             <label htmlFor='lac' 
                             style={{ 
-                                background: '#7289da', borderRadius: '4px', textAlign: 'center', 
-                                width: '59%',height:'85%', fontSize:'10px', marginLeft:'-41%' 
+                                background: '#7289da', color:'#FFFFFF',borderRadius: '4px', 
+                                textAlign: 'center', width: '59%',height:'85%', 
+                                fontSize:'10px', marginLeft:'-41%' 
                                 }} 
                                 >Message Identifier :
                             <select id="messageIdentifier" name="message_identifier" onChange={this.handleChange} value={this.state.value} autoComplete="messageIdentifier" 
@@ -191,7 +195,7 @@ class Generator2G extends Component {
                             style={{
                                  background: '#7289da', borderRadius: '4px', marginLeft: '-92%', 
                                  marginTop:'13%', width: '340%', height: '84%',
-                                 fontSize:'10px'
+                                 fontSize:'10px', color:'#FFFFFF'
                                   }} 
                                   >language:
                                 <select id="messageIdentifier" name="language" onChange={this.handleChange} value={this.state.value}  style={{marginTop:'7px', width:'95%', }} autoComplete="language">
@@ -210,7 +214,7 @@ class Generator2G extends Component {
                             <label htmlFor="messageContent"  
                                 style={{ 
                                     textAlign:'center', background: '#7289da', borderRadius: '4px', 
-                                    width: '409%',height:'140%', 
+                                    width: '409%',height:'140%', color:'#FFFFFF',
                                     fontSize:'10px', display:'inline-block', marginTop:'15%' }}
                                 >Message Content:
                                     <textarea name="messageContent" id='messageContent' placeholder="Message Content"   onChange={this.handleChange} value={this.state.value}
@@ -227,7 +231,8 @@ class Generator2G extends Component {
                             <label htmlFor='bcsIpAddress' 
                             style={{ 
                                 background: '#7289da', borderRadius: '4px', marginLeft: '0%', 
-                                marginTop:'40%', width: '143%', fontSize:'10px' 
+                                marginTop:'40%', width: '143%', fontSize:'10px',
+                                color:'#FFFFFF' 
                                 }} 
                                 >BSC IP Address :
                                 <input name='bcsIpAddress' placeholder='BSC IP Address' onChange={this.handleChange} value={this.state.value}

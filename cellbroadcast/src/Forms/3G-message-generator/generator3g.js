@@ -85,7 +85,10 @@ class Generator3G extends Component {
                         <Grid.Column width={8}>
 
                             <label htmlFor='sac' 
-                                    style={{ background: '#F67280', borderRadius: '4px', textAlign: 'center', width: '138%', fontSize:'12px' }} >SAC :
+                                    style={{
+                                         background: '#F67280', borderRadius: '4px', textAlign: 'center', 
+                                         width: '138%', fontSize:'12px', color:'#FFFFFF'
+                                         }} >SAC :
                                 <input name='sac' placeholder='SAC...' onChange={this.handleChange} value={this.state.value}
                                     style={{
                                         width: '70%', height: '20%', padding: '12px 20px', margin: '8px 0',
@@ -98,7 +101,10 @@ class Generator3G extends Component {
 
                         <Grid.Column width={8}>
                             <label htmlFor='repitationPeriod' 
-                                style={{ background: '#F67280', borderRadius: '4px', marginLeft: '51%', width: '140%', fontSize:'12px' }} 
+                                style={{ 
+                                    background: '#F67280', borderRadius: '4px', marginLeft: '51%', 
+                                    width: '140%', fontSize:'12px', color:'#FFFFFF'
+                                 }} 
                                 >Repitation Period :
 
                                 <input name='repitationPeriod' placeholder='Repitation Period...'  onChange={this.handleChange} value={this.state.value}
@@ -116,7 +122,10 @@ class Generator3G extends Component {
                     <Grid.Row>
                         <Grid.Column width={8}>
                             <label htmlFor='lac'  
-                                   style={{ background: '#F67280', borderRadius: '4px', textAlign: 'center', width: '135%', fontSize:'12px' }} 
+                                   style={{ 
+                                       background: '#F67280', borderRadius: '4px', textAlign: 'center', 
+                                       width: '135%', fontSize:'12px', color:'#FFFFFF' 
+                                    }} 
                                    >LAC :
                                 <input name='lac' placeholder='LAC...'  onChange={this.handleChange} value={this.state.value}
                                     style={{
@@ -130,7 +139,9 @@ class Generator3G extends Component {
 
                         <Grid.Column width={8}>
                             <label htmlFor='numberOfBroadcastRequest' 
-                            style={{ background: '#F67280', borderRadius: '4px', marginLeft: '45%', width: '125%', fontSize:'12px' }} 
+                            style={{ 
+                                background: '#F67280', borderRadius: '4px', marginLeft: '45%', 
+                                width: '125%', fontSize:'12px', color:'#FFFFFF' }} 
                             >Number Of Broadcast Request :
                                 <input name='numberOfBroadcastRequest' placeholder='Number Of Broadcast Request...'  onChange={this.handleChange} value={this.state.value}
                                     style={{
@@ -148,7 +159,8 @@ class Generator3G extends Component {
                             <label htmlFor='message_identifier' 
                             style={{ 
                                 background: '#F67280', borderRadius: '4px', textAlign: 'center', 
-                                width: '59%',height:'85%', fontSize:'10px', marginLeft:'-41%' 
+                                width: '59%',height:'85%', fontSize:'10px', marginLeft:'-41%',
+                                color:'#FFFFFF' 
                                 }} 
                                 >Message Identifier :
                             <select  name="message_identifier" onChange={this.handleChange} value={this.state.value} autoComplete="message_identifier "  
@@ -179,7 +191,7 @@ class Generator3G extends Component {
                             style={{
                                  background: '#F67280', borderRadius: '4px', marginLeft: '-92%', 
                                  marginTop:'13%', width: '340%', height: '84%',
-                                 fontSize:'10px'
+                                 fontSize:'10px',color:'#FFFFFF'
                                   }} 
                                   >language:
                                 <select  name="language" onChange={this.handleChange} value={this.state.value}  style={{marginTop:'7px', width:'95%', }} autoComplete="language">
@@ -198,7 +210,7 @@ class Generator3G extends Component {
                             <label htmlFor="messageContent"  
                                 style={{ 
                                     textAlign:'center', background: '#F67280', borderRadius: '4px', 
-                                    width: '409%',height:'140%', 
+                                    width: '409%',height:'140%', color:'#FFFFFF',
                                     fontSize:'10px', display:'inline-block', marginTop:'15%' }}
                                 >Message Content:
                                     <textarea name="messageContent" id='messageContent' placeholder="Message Content"    onChange={this.handleChange} value={this.state.value}
@@ -212,7 +224,13 @@ class Generator3G extends Component {
 
                     <Grid.Row>
                         <Grid.Column>
-                            <label htmlFor='rncIpAddress' style={{ background: '#F67280', borderRadius: '4px', marginLeft: '0%', marginTop:'40%', width: '143%', fontSize:'10px' }} >RNC IP Address :
+                            <label htmlFor='rncIpAddress' 
+                            style={{ 
+                                background: '#F67280', borderRadius: '4px', marginLeft: '0%', 
+                                marginTop:'40%', width: '143%', fontSize:'10px',
+                                color:'#FFFFFF'
+                                 }} 
+                                 >RNC IP Address :
                                 <input name='rncIpAddress' placeholder='RNC IP Address'  onChange={this.handleChange}
                                     style={{
                                         width: '60%', height: '80%', padding: '12px 20px', margin: '8px 0',
