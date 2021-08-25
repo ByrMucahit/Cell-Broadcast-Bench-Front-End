@@ -23,7 +23,7 @@ class Home extends Component {
                     <Button  color="primary" tag={Link} to={"/Generator2G"}>2G</Button>{' '}
                     <Button  color="secondary" tag={Link} to={"/Generator3G"}>3G</Button>{' '}
                     <Button  color="info" tag={Link} to={"/Generator4G"}>4G</Button>{' '}
-                    <Button  color="success" tag={Link} to={"/List"}>List</Button>{' '}
+                    
                 </ButtonGroup>
                 <Image style={{ marginTop: '5%' }} src={srcImage} size='tiny' centered />
       
